@@ -171,7 +171,7 @@ while True:
 
             #print(old)
 
-            time.sleep(2)
+            time.sleep(60)
 
     except Exception as err:
         print(f"Unexpected {err}, {type(err)}")
