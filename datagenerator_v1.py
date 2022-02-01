@@ -60,19 +60,20 @@ def distance_calc(user):
         alert_lon_frnds_user = {} #nos creamos otro diccionario para asignar los amigos de un usuario y la longitud a la que están
 
         for friend in user_frnds:
+            #como en cada paso actualizamos la lat y lon de cada user, podemos calcular la nueva distancia entre un user y sus friends (los friends a su vez son también users)
             print(friend)
             frnd_lat = users[friend]['position']['lat']
             frnd_lon = users[friend]['position']['lon']
             dist_frnd = round(distance_between_points(user_lat, user_lon, frnd_lat, frnd_lon),2)
-            if dist_frnd <= dist_max:
+            if dist_frnd <= dist_max: #comprobamos que la distancia es < 2km que es lo que nos hemos definido
                 print('Distancia: ',dist_frnd)
-                alert_frnds_user[friend] = dist_frnd
-                alert_lat_frnds_user[friend] = frnd_lat
-                alert_lon_frnds_user[friend] = frnd_lon
+                alert_frnds_user[friend] = dist_frnd   #añadimos el id del friend y la distancia entre el user y su friend
+                alert_lat_frnds_user[friend] = frnd_lat #añadimos la lat del friend
+                alert_lon_frnds_user[friend] = frnd_lon #añadimos la lon del friend
         #print(alert_frnds_user)
-        users[user]['distance_frnds'] = alert_frnds_user
-        users[user]['lat_frnds'] = alert_lat_frnds_user
-        users[user]['lon_frnds'] = alert_lon_frnds_user
+        users[user]['distance_frnds'] = alert_frnds_user #añadimos el contenido obtenido anteriormente
+        users[user]['lat_frnds'] = alert_lat_frnds_user #añadimos el contenido obtenido anteriormente
+        users[user]['lon_frnds'] = alert_lon_frnds_user #añadimos el contenido obtenido anteriormente
 
 def initiate_data():
     global users #utiliza global porque es una variable global de todo el programa no es local de la función
